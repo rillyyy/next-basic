@@ -28,15 +28,24 @@ type Props = {
   params: {
     city: string;
   };
+  searchParams: {
+    cityName: string;
+  };
 };
 
-const Detail = ({ params }: Props) => {
-  const cityName = params.city === "daegu" ? "대구" : params.city;
+// 동적 MetaData
+export function generateMetadata({ params, searchParams }: Props) {
+  return {
+    title: `새로운 타이틀 - ${searchParams.cityName}`,
+    description: `${searchParams.cityName} : 연습하고 있습니다. ^^`,
+  };
+}
+
+const Detail = ({ params, searchParams }: Props) => {
+  // const cityName = params.city === "daegu" ? "대구" : params.city;
   return (
     <>
-      <div className={style.detailTitle}>상세내용 : {cityName}</div>
-      {/* <Link href="/">이전페이지</Link> */}
-      {/* <button onClick={() => handleClick()}>이전으로</button> */}
+      <div className={style.detailTitle}>상세내용 : {searchParams.cityName}</div>
       <HomeButton />
     </>
   );
